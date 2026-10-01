@@ -1,25 +1,21 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        mapping = {
-            ")" : "(",
-            "]": "[",
-            "}": "{"
-        }
-        
-        stack = []
-
-        for ch in s:
-            if ch not in mapping:
-                stack.append(ch)
-            
+        i=0
+        a=[]
+        for i in range(len(s)):
+            if s[i]=='('or s[i]=='['or s[i]=='{':
+                a.append(s[i])
             else:
-                if not stack:
+                if not a:
                     return False
-                
-                else:
-                    popped = stack.pop()
-                    if popped != mapping[ch]:
-                        return False
-        
-        return not stack
+                top=a.pop()
+                if s[i]==')'and top!='(':
+                    return False
+                if s[i]==']'and top!='[':
+                    return False
+                if s[i]=='}'and top!='{':
+                    return False
+        return len(a)==0
+
             
+        
